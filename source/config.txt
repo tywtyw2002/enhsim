@@ -1,0 +1,275 @@
+#################	//comment marks are # and //
+##ENHSIM CONFIG##	//if you write comments on the same line with config line
+#################	//leave at least one space between the comment and value
+
+
+//IMPORTANT: Be careful when inputting your stats. Read is the value rating or percent etc. Read the comments.
+//You always input what you see on your character sheet/paper doll.
+
+simulation_time			2500 	//in hours, you can also input decimals ex. 0.05
+simulation_time_combatlog	300	//in minutes
+combat_length			6	//in minutes
+report_count			80 	//how many times the progress is reported during the simulation
+threads				2	//number of threads to use, combatlogging always uses 1 thread
+min_lag				0	//in milliseconds, lag means ping + player reaction time
+max_lag				0	//1000 ms = 1s
+simulate_mana			1	//{ 0 | 1 } if disabled, increases speed, but doesn't take mana limitations into account
+
+
+
+########### //To understand the EP ranges you have to understand how EP values are calculated. 
+#EP RANGES# //For example, to calculate EP value of crit rating, first I simulate the normal "baseline" dps.
+########### //Then I simulate dps with increased crit rating. I take the dps difference and divide it by the
+//increased crit rating to get dps/crit rating value. EP range means how much crit rating did I increase.
+
+//Watch the expertise and hit caps. For example if expertise goes over the cap resulting from too high EP
+//range, the EP value will go lower than it should be. On the other hand, if you give too low EP ranges,
+//you won't get accurate results. Best scenario is low EP ranges and high simulation time.
+
+//If hit/spellhit or expertise is already over the cap, test will be skipped. Although you can
+//give negative ep range to see how much EP is hit/expertise worth to have. To skip a test, use 0 as range.
+
+//Which stat is used as baseline stat, meaning it gets EP value of 1. This is important when calculating EP values.
+ep_base_stat			ap //{ ap | sp }
+ep_ap 				40
+ep_crit_rating 			20
+ep_hit_rating 			20
+ep_expertise 			3 //not rating
+ep_haste_rating 		20
+ep_armor_ignore         110
+ep_spellpower 			24
+ep_spellcrit_rating     30
+ep_spellhit_rating      30
+ep_dps				7.5
+ep_mana				200
+ep_spirit			100
+ep_mp5				20
+
+
+
+###################
+#ROTATION AND MISC#
+###################
+mh_auto_attack			1	//{ 0 | 1 }
+oh_auto_attack			1	//{ 0 | 1 }
+wait_ss_with_wf_cd		0.00	//max seconds to wait to SS, if wf cd is still up
+cast_ll_only_if_wf_on_cd	0	//{ 0 | 1 } this is noted only if you have dual wf
+bloodlust_casters		2	//{ 0 | 1 | 2 }
+sync_bloodlust_with_trinkets	1	//{ 0 | 1 }
+cast_lvb_only_if_ed_left	15.0	//cast LvB only if ED duration x or less seconds left
+cast_lvb_only_if_fsdots_left	4	//maximum Flame Shock dot ticks left to cast LvB
+cast_lvb_only_if_fs_active	1	//{ 0 | 1 }
+cast_fs_only_if_dots_left	0	//maximum Flame Shock dot ticks left to cast Flame Shock
+cast_ls_only_if_charges_left	0	//maximum Lightning Shield charges left to cast LS
+cast_sr_only_if_mana_left	700	//maximum mana left to cast SR
+use_mana_potion_if_mana_left	3000	//maximum mana left to use mana potion
+
+
+//set the rotation priority
+//SS = stormstrike
+//FS = flame shock
+//ES = earth shock
+//Frost = frost shock
+//MW5_LB = maelstrom weapon cast lightning bolt, min 5 charges
+//MW3_CL = maelstrom weapon cast chain lightning, min 3 charges
+//generic form: MWx_YY, x is 1-5 and YY is either LB or CL
+//LS = lightning shield
+//LL = lava lash
+//LB = lightning bolt
+//CL = chain lighting
+//LVB = lava burst
+//ST = searing totem
+//SR = shamanistic rage
+rotation_priority_count		4
+rotation_priority1		SR
+rotation_priority2		FS
+rotation_priority3		SS
+rotation_priority4		ES
+
+
+##########
+#BOSS#####
+##########
+miss				9.00	//%
+dodge				6.50	//%
+glancing			25.00	//%
+armor				7700	
+spell_miss			17.00	//%
+
+nature_resistance		0	//effective resistances
+fire_resistance			0
+frost_resistance		0
+
+
+
+######### //default value after the buff in comment
+#BUFFS### //put to 0 if you dont use that buff
+#########
+armor_debuff_major		0/2600		//acid spit, expose armor, sunder armor
+armor_debuff_minor		0/610		//faerie fire, sting, curse of recklessness
+physical_vulnerability_debuff	0.0/2.0		//%, bloody frenzy, 2nd talent spec TBA
+melee_haste_buff		0.0/20.0	//%, improved icy talons, windfury totem
+melee_crit_chance_buff		0.0/5.0		//%, leader of the pack, rampage
+attack_power_buff_flat		0/306		//battle shout, blessing of might
+attack_power_buff_multiplier	0.0/99.7	//BUFF UPTIME %, DISABLES UR, abominations might, trueshot aura, (unleashed rage)
+spell_haste_buff		0.0/5.0		//%, wrath of air totem
+spell_crit_chance_buff		0.0/5.0		//%, moonkin aura, elemental oath
+spell_crit_chance_debuff	0.0/10.0	//%, improved scorch, winter's chill
+spell_damage_debuff		0.0/10.0	//%, ebon plaugebearer, earth and moon, curse of elements, totem of wrath
+spellpower_buff			0/150		//focus magic, improved divine spirit, flametongue totem, demonic pact
+spell_hit_chance_debuff		0.0/3.0		//%, improved faerie fire, misery
+haste_buff			0.0/3.0		//%, improved moonkin aura, swift retribution
+percentage_damage_increase	0.0/3.0		//%, ferocious inspiration, sanctified retribution
+crit_chance_debuff		0.0/3.0		//%, heart of the crusader, totem of wrath
+stat_multiplier			0.0/10.0	//%, blessing of kings
+stat_add_buff			0/19		//mark of the wild
+agi_and_strength_buff		0/98		//strength of earth, horn of winter
+intellect_buff			0/40		//arcane intellect, fel intelligence
+
+replenishment			1		//{ 0 | 1 }
+water_shield			0		//{ 0 | 1 }
+mana_spring_totem		1		//{ 0 | 1 }
+blessing_of_wisdom		0		//{ 0 | 1 }
+judgement_of_wisdom		0		//{ 0 | 1 }
+
+
+
+#############
+#CONSUMABLES#
+#############//remember that you can use guardian elixir only if you use elixir in the flask_elixir slot
+
+flask_elixir			elixir_of_major_agility
+//{ flask_of_relentless_assault | elixir_of_major_agility | fel_strength_elixir |
+//  elixir_of_major_strength | elixir_of_demonslaying | elixir_of_the_mongoose |
+//  elixir_of_mastery | gurus_elixir | elixir_of_mighty_agility | elixir_of_mighty_strength | - }
+
+guardian_elixir			elixir_of_draenic_wisdom
+//{ elixir_of_draenic_wisdom | - }
+
+potion				haste_potion
+//{ haste_potion | insane_strength_potion | heroic_potion | super_mana_potion |
+//  runic_mana_potion | - }
+
+food				spice_hot_talbuk
+//{ roasted_clefthoof | spice_hot_talbuk | ravager_dog | warp_burger | skullfish_soup | - }
+
+misc_item			drums_of_battle
+// { drums_of_battle | - }
+
+
+
+
+
+###############################################################################
+### Everything in the section below can be replaced by information obtained ###
+### from your paper doll stats or exported by the ShockAndAwe addon         ###
+###############################################################################
+
+
+##########
+#SHAMAN###
+##########
+race				draenei	//{ orc | tauren | troll | draenei }
+mh_speed			2.60
+oh_speed			2.40
+mh_dps				100.3
+oh_dps				107.9
+mh_crit				31.42	//%
+oh_crit				31.42	
+mh_hit				8.05	//%, you give hit which shows on your character sheet
+oh_hit				8.05
+mh_expertise_rating		112	//notice that these are given as rating
+oh_expertise_rating		112
+ap				1866	//when changing this, remember to change the spellpower also(if have mental quickness talent)
+haste				6.47	//%
+ignore_armor		0	//
+str				277
+agi				289
+int				208
+spi				100
+spellpower			560	//you give the spellpower which shows on your character sheet
+spell_crit			26.18	//%
+spell_hit			13.00	//%, you give spell hit which shows on your character sheet
+max_mana			6000
+mp5				0	//in combat
+
+mh_imbue	 		windfury
+oh_imbue	 		windfury
+//{ windfury | flametongue | - }
+
+mh_enchant			mongoose
+oh_enchant			mongoose
+//{ mongoose | executioner | crusader | deathfrost | - }
+
+mh_weapon			axe
+oh_weapon			axe
+//{ axe | - } used currently only for orc's racial bonus
+//in the future, this might also be used for items similiar to Dragonstrike
+
+trinket1			madness_of_the_betrayer
+trinket2			shard_of_contempt
+//{ dragonspine_trophy | ashtongue_talisman |
+//  madness_of_the_betrayer | hourglass_of_the_unraveller |
+//  tsunami_talisman | shard_of_contempt |
+//  berserkers_call | bloodlust_brooch |
+//  abacus_of_violent_odds | badge_of_tenacity |
+//  shadowsong_panther | blackened_naaru_sliver |
+//  darkmoon_card_crusade | fury_of_the_five_flights |
+//  grim_toll | loathebs_shadow | mirror_of_truth | 
+//  the_skull_of_guldan | meteorite_whetstone | embrace_of_the_spider |
+//  dying curse | illustration_of_the_dragon_soul |
+//  sundial_of_the_exiled | forge_ember | incisor_fragment |
+//  mark_of_the_war_prisoner | sphere_of_the_red_dragons_blood |
+//  tome_of_arcane_phenomena | - }
+
+totem				stonebreakers_totem
+//{ stonebreakers_totem | totem_of_the_astral_winds | totem_of_splintering |
+//  totem_of_ancestral_guidance | totem_of_the_void | skycall_totem | 
+//  totem_of_hex | - }
+
+set_bonus			skyshatter_harness_4
+//{ cyclone_harness | cataclysm_harness | desolation_battlegear |
+//  skyshatter_harness_2 | skyshatter_harness_4 | skyshatter_regalia_2 |
+//  skyshatter_regalia_4 | naxx_melee_2 | naxx_melee_4 | gladiators_earthshaker |
+//  naxx_nuker_2 | naxx_nuker_4 | - }
+
+metagem				relentless_earthstorm_diamond
+//{ relentless_earthstorm_diamond | thundering_skyfire_diamond | 
+//  chaotic_skyfire_diamond | chaotic_skyflare_diamond |
+//  ember_skyflare_diamond | relentless_earthsiege_diamond | - }
+
+//you can't use same type of glyph in multiple slots
+glyph_major1			-
+glyph_major2			-
+glyph_major3			-
+glyph_major4			-
+//{ lightning_shield | flametongue_weapon | lightning_bolt |
+//  windfury_weapon | stormstrike | earth_shock | lava | lava_lash |
+//  water_mastery | - }
+
+glyph_minor1			-
+glyph_minor2			-
+glyph_minor3			-
+
+
+
+#########
+#TALENTS#
+#########
+flurry              5/5 //ENHANCEMENT
+improved_weapon_totems      2/2
+elemental_weapons       3/3
+mental_quickness        3/3
+weapon_mastery          5/5
+dual_wield_specialization   3/3
+unleashed_rage          5/5
+shamanistic_rage        1/1
+
+natures_guidance        3/3 //RESTORATION
+
+concussion          0/5 //ELEMENTAL
+call_of_flame           0/3
+//reverberation         0/5 //unused, you control the shock cd with average_shocks_per_minute
+elemental_devastation       0/3
+elemental_fury          0/1
+elemental_precision     0/3

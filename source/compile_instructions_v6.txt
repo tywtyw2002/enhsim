@@ -1,0 +1,17 @@
+This program uses boost::pool and ZThreads. Boost is a header only library so you just have to download, unpack and set the directories in your compilers settings to get it to work. For ZThreads, you also have to build it to static library and link it with enhsim build.
+If you do not want to use ZThreads(multithreading), you can define NOTHREADS during compile to exclude it.
+
+(I removed the boost headers from enhsim package, it's cleaner this way. Boost is also easy to setup so it didn't bring much good to have it.)
+
+http://www.boost.org/
+http://zthread.sourceforge.net/
+
+If you want SFMT to use SSE2, define HAVE_SSE2.
+If you want to have combat log printed to screen, define DEBUG.
+If you want level 80 stuff, define LVL80.
+
+
+Here is one example build command with g++ given by Raut:
+g++ -pthread -I/usr/local/ZThread/include *.cpp /usr/local/ZThread/lib/libZThread.a -o enhsim
+
+This obviusly assumes that you have ZThreads built as static library.
